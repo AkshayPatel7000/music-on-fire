@@ -22,7 +22,6 @@
     "express": "^4.17.1",
     "helmet": "^4.4.1",
     "memory-cache": "^0.2.0",
-    "netlify-lambda": "^2.0.15",
     "node-fetch": "^2.6.7",
     "serverless-http": "^3.1.0"
   },
