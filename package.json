@@ -8,7 +8,6 @@
     "dev": "nodemon src/index.js",
     "lint": "eslint --fix src",
     "test": "mocha --exit",
-    "build": "[my-framework] build --output public"
   },
   "keywords": [],
   "author": "Lavdeep Singh",
