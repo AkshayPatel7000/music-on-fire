@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use(compression());
 
-app.get("/", (req, res) => {
+app.get("/", cors(), (req, res) => {
   res.json({
     message: "Welcome to Musico API",
     "API Docs":

@@ -26,7 +26,6 @@ router.get("/", async (req, res) => {
   let link = GetDetails(id, type, page, n);
   console.log(link);
   const response = await get(link);
-
   caching.put(id, response.data, cacheTime);
   res.status(200).json({ data: response.data, source: "API" });
 });
