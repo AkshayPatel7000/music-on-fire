@@ -9,7 +9,10 @@ const GetDetails = (id, type, page, n) =>
 
 const GetSongDetails = (pid) =>
   `https://www.jiosaavn.com/api.php?__call=song.getDetails&_marker=0%3F_marker%3D0&_format=json&pids=${pid}`;
-
+const getAlbumDetails = (aid) =>
+  `https://www.jiosaavn.com/api.php?__call=content.getAlbumDetails&albumid=${aid}&api_version=4&_format=json&_marker=0&ctx=web6dot0`;
+const getPlaylistDetails = (pid) =>
+  `https://www.jiosaavn.com/api.php?__call=playlist.getDetails&listid=${pid}&api_version=4&_format=json&_marker=0&ctx=web6dot0`;
 const GetLyrics = (pid) =>
   `https://www.jiosaavn.com/api.php?__call=lyrics.getLyrics&ctx=web6dot0&api_version=4&_format=json&_marker=0%3F_marker%3D0&lyrics_id=${pid}`;
 
@@ -35,4 +38,6 @@ module.exports = {
   CreateQueue,
   GetSongsByStation,
   GetMoreSongs,
+  getAlbumDetails,
+  getPlaylistDetails,
 };

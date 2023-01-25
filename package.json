@@ -4,7 +4,7 @@
   "description": "An API for music data",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "nodemon start",
     "dev": "nodemon src/index.js",
     "lint": "eslint --fix src",
     "test": "mocha --exit",
@@ -24,6 +24,6 @@
     "serverless-http": "^3.1.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.20"
   }
 }

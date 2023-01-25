@@ -1,31 +1,21 @@
-const express = require('express');
-const { default: fetch } = require('node-fetch');
-const { GetLyrics } = require('../endpoints');
+const express = require("express");
+const { default: fetch } = require("node-fetch");
+const { GetLyrics } = require("../endpoints");
 
-const { get } = require('../get');
+const { get } = require("../get");
 const router = express.Router();
 
+router.get("/", async (req, res) => {
+  const id = req.query.id;
 
-router.get('/', async (req, res) => {
+  if (!id) {
+    res.json({ error: "Invalid Arguments" });
+    return;
+  }
 
-    
-      const id=req.query.id;
-     
-     
-      if(!id){
-          res.json({"error":"Invalid Arguments"});
-          return;
-      }
+  const response = await get(GetLyrics(id));
 
-      const response=await get(GetLyrics(id));
-    
-
-    res.status(200).json({data:response.data,"source":"API"});
-
-      
-    
-  
-
-  });
+  res.status(200).json({ data: response.data, source: "API" });
+});
 
 module.exports = router;
