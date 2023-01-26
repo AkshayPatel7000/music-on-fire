@@ -9,6 +9,7 @@ const get = async (url) => {
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.1518.61",
     };
     const d = await fetch(url, { headers });
+
     res.data = await d.json();
   } catch (error) {
     console.log(error.message);

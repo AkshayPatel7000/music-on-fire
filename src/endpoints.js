@@ -28,7 +28,8 @@ const GetSongsByStation = (stationid, n) =>
 
 const GetMoreSongs = (query, page) =>
   `https://www.jiosaavn.com/api.php?p=${page}&q=${query}&_format=json&_marker=0&api_version=4&ctx=web6dot0&n=40&__call=search.getResults`;
-
+const AuthGetSong = (url) =>
+  `https://www.jiosaavn.com/api.php?__call=song.generateAuthToken&url=${url}&bitrate=128&api_version=4&_format=json&ctx=web6dot0&_marker=0`;
 module.exports = {
   GetLaunchData,
   Search,
@@ -40,4 +41,5 @@ module.exports = {
   GetMoreSongs,
   getAlbumDetails,
   getPlaylistDetails,
+  AuthGetSong,
 };

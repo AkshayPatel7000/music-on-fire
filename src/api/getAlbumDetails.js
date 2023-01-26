@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAlbumDetails } = require("../endpoints");
+const { getAlbumDetails, AuthGetSong } = require("../endpoints");
 const { get } = require("../get");
 const router = express.Router();
 const cache = require("memory-cache");
@@ -10,7 +10,6 @@ const cacheTime = 20 * 60 * 1000; //time in mili seconds
 router.get("/", async (req, res) => {
   const aid = req.query.aid;
 
-  console.log(aid);
   if (!aid) {
     res.json({ error: "Invalid Arguments" });
     return;
@@ -19,9 +18,27 @@ router.get("/", async (req, res) => {
   let link = getAlbumDetails(aid);
   console.log(link);
   const response = await get(link);
-  console.log("getAlbumDetails->>>>.", JSON.stringify(response?.data));
+  let finalData = response.data;
+  var newAlbumData = response?.data?.list?.map(async (album) => {
+    var url = album.more_info.encrypted_media_url.split("+").join("%2B");
+    url.split("/").join("%2");
+    var authLink = AuthGetSong(url);
+    var albumData = await get(authLink).then((res) => res);
+
+    return { ...album, ...albumData.data };
+  });
+  Promise.all(newAlbumData)
+    .then((resp) => {
+      finalData = { ...response.data, list: resp };
+      res
+        .status(200)
+        .json({ data: { ...response.data, list: resp }, source: "API" });
+    })
+    .catch((err) => {
+      res.status(200).json({ data: response.data, source: "API" });
+    });
+
   //   caching.put(aid, response.data, cacheTime);
-  res.status(200).json({ data: response.data, source: "API" });
 });
 
 module.exports = router;
