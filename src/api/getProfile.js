@@ -40,7 +40,7 @@ router.get("/getUrl", async (req, res) => {
   };
 
   let imageResponse = await get(image, options);
-  console.log("imageResponse", imageResponse.data.output);
+  console.log("imageResponse", imageResponse.data);
   res.status(200).json({ data: imageResponse.data.output, source: "API" });
 
   //   res.status(200).json({ data: response.data, source: "API" });
