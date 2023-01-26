@@ -37,8 +37,9 @@ const AuthGetSong = (url) =>
 
 // INSTA
 const getInstaSearch = (query) =>
-  `https://www.instagram.com/api/v1/web/search/topsearch/?context=blended&query=${query}`;
-
+  `https://www.instagram.com/api/v1/web/search/topsearch/?query=${query}`;
+const getProfile = (uname) => `
+https://www.instagram.com/api/v1/users/web_profile_info/?username=${uname}`;
 module.exports = {
   GetLaunchData,
   Search,
@@ -52,4 +53,5 @@ module.exports = {
   getPlaylistDetails,
   AuthGetSong,
   getInstaSearch,
+  getProfile,
 };

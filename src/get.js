@@ -24,5 +24,20 @@ const get = async (url, options) => {
 
   return res;
 };
+const post = async (url, options) => {
+  const res = {};
 
-module.exports = { get };
+  res.data = [];
+  try {
+    const d = await fetch(url, options);
+
+    res.data = await d.json();
+  } catch (error) {
+    console.log(error.message);
+    res.error = error.message;
+  }
+
+  return res;
+};
+
+module.exports = { get, post };
