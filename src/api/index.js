@@ -8,6 +8,7 @@ const getsongs = require("./getsongs");
 const getlyrics = require("./getlyrics");
 const getAlbumDetails = require("./getAlbumDetails");
 const getPlaylistDetails = require("./getPlaylistDetails");
+const getInstaSearch = require("./getInstaSearch");
 
 const router = express.Router();
 
@@ -27,4 +28,5 @@ router.use("/getsongs", getsongs);
 router.use("/getlyrics", getlyrics);
 router.use("/getAlbumDetails", getAlbumDetails);
 router.use("/getPlaylistDetails", getPlaylistDetails);
+router.use("/getInstaSearch", getInstaSearch);
 module.exports = router;
