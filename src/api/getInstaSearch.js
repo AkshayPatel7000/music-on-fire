@@ -11,10 +11,10 @@ router.get("/", async (req, res) => {
     return;
   }
   let options = {
-    headers: {
-      "x-ig-app-id": "936619743392459",
-    },
+    method: "GET",
+    headers: { "x-ig-app-id": "936619743392459" },
   };
+
   if (req.headers["x-ig-app-id"]) {
     options.headers["x-ig-app-id"] = req.headers["x-ig-app-id"];
   }

@@ -37,7 +37,7 @@ const AuthGetSong = (url) =>
 
 // INSTA
 const getInstaSearch = (query) =>
-  `https://www.instagram.com/api/v1/web/search/topsearch/?context=blended&query=${query}&rank_token=0.4394261312303833&include_reel=true`;
+  `https://www.instagram.com/api/v1/web/search/topsearch/?context=blended&query=${query}`;
 
 module.exports = {
   GetLaunchData,
