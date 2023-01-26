@@ -7,12 +7,10 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const id = req.query.id;
-
   if (!id) {
     res.json({ error: "Invalid Arguments" });
     return;
   }
-
   const response = await get(GetLyrics(id));
 
   res.status(200).json({ data: response.data, source: "API" });

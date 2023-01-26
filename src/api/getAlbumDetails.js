@@ -25,7 +25,7 @@ router.get("/", async (req, res) => {
     var authLink = AuthGetSong(url);
     var albumData = await get(authLink).then((res) => res);
 
-    return { ...album, ...albumData.data };
+    return { ...album, songUrl: albumData.data.auth_url };
   });
   Promise.all(newAlbumData)
     .then((resp) => {

@@ -1,5 +1,5 @@
 const express = require("express");
-const { getPlaylistDetails } = require("../endpoints");
+const { getPlaylistDetails, GetDetails } = require("../endpoints");
 const { get } = require("../get");
 const router = express.Router();
 const cache = require("memory-cache");
@@ -9,20 +9,33 @@ const cacheTime = 20 * 60 * 1000; //time in mili seconds
 
 router.get("/", async (req, res) => {
   const pid = req.query.pid;
-
   console.log(pid);
   if (!pid) {
     res.json({ error: "Invalid Arguments" });
     return;
   }
-
   let link = getPlaylistDetails(pid);
   console.log(link);
   const response = await get(link);
+  var data = response.data;
 
-  console.log("getPlaylistDetails->>>>.");
+  var final_data = data?.list?.map(async (res) => {
+    var id = res.id;
+    var songurl = await get(
+      `https://music-on-fire.vercel.app/api/v1/getsongurl?id=${id}&bitrate=128`
+    );
+    return { ...data, list: { ...res, songUrl: songurl?.data?.url } };
+  });
+
+  Promise.all(final_data)
+    .then((resp) => {
+      // console.log("final->");
+      res.status(200).json({ data: resp, source: "API" });
+    })
+    .catch((err) => {
+      res.status(200).json({ data: response.data, source: "API" });
+    });
   //   caching.put(aid, response.data, cacheTime);
-  res.status(200).json({ data: response.data, source: "API" });
 });
 
 module.exports = router;
