@@ -14,7 +14,6 @@ router.get("/", async (req, res) => {
     method: "GET",
     headers: {
       "x-ig-app-id": "936619743392459",
-      "x-ig-app-id": "oF30kb26MWMgPXPeHN9tHDs1NcwRAXIi",
     },
   };
 
