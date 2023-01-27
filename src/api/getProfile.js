@@ -12,7 +12,10 @@ router.get("/", async (req, res) => {
   }
   let options = {
     method: "GET",
-    headers: { "x-ig-app-id": "936619743392459" },
+    headers: {
+      "x-ig-app-id": "936619743392459",
+      "x-ig-app-id": "oF30kb26MWMgPXPeHN9tHDs1NcwRAXIi",
+    },
   };
 
   if (req.headers["x-ig-app-id"]) {
@@ -20,8 +23,11 @@ router.get("/", async (req, res) => {
   }
 
   const response = await get(getProfile(query), options);
-
-  res.status(200).json({ data: response.data, source: "API" });
+  if (response.error) {
+    res.status(400).json({ data: response.error, source: "API" });
+  } else {
+    res.status(200).json({ data: response.data, source: "API" });
+  }
 });
 router.get("/getUrl", async (req, res) => {
   const image = req.query.url;
