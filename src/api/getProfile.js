@@ -2,8 +2,8 @@ const express = require("express");
 const { getProfile } = require("../endpoints");
 const { get, post } = require("../get");
 const router = express.Router();
-
-router.get("/", async (req, res) => {
+const cors = require("cors");
+router.get("/", cors(), async (req, res) => {
   const query = req.query.uname;
 
   if (!query) {
@@ -64,6 +64,7 @@ router.post("/upScale", async (req, res) => {
     version: "9283608cc6b7be6b65a8e44983db012355fde4132009bf99d976b2f0896856a3",
     input: {
       img: image,
+      scale: 3,
     },
   });
 
