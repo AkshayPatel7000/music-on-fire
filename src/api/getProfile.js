@@ -22,11 +22,8 @@ router.get("/", async (req, res) => {
   }
 
   const response = await get(getProfile(query), options);
-  if (response.error) {
-    res.status(400).json({ data: response.error, source: "API" });
-  } else {
-    res.status(200).json({ data: response.data, source: "API" });
-  }
+
+  res.status(200).json({ data: response.data, source: "API" });
 });
 router.get("/getUrl", async (req, res) => {
   const image = req.query.url;
