@@ -1,10 +1,10 @@
 const express = require("express");
-const cors = require("cors");
+
 const { getInstaSearch } = require("../endpoints");
 const { get } = require("../get");
 const router = express.Router();
 
-router.get("/", cors(), async (req, res) => {
+router.get("/", async (req, res) => {
   const query = req.query.query;
 
   if (!query) {

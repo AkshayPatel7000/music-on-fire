@@ -3,7 +3,7 @@ const { getProfile } = require("../endpoints");
 const { get, post } = require("../get");
 const router = express.Router();
 const cors = require("cors");
-router.get("/", cors(), async (req, res) => {
+router.get("/", async (req, res) => {
   const query = req.query.uname;
 
   if (!query) {

@@ -24,7 +24,7 @@ app.get("/", cors(), (req, res) => {
   });
 });
 
-app.use("/api/v1", api);
+app.use("/api/v1", cors(), api);
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
