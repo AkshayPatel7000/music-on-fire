@@ -30,9 +30,9 @@ function decode(str) {
   return r;
 }
 
-async function getsongurl(encrypted_media_url) {
+async function getsongurl(encrypted_media_url, bitrate) {
   const media_url = decode(encrypted_media_url);
-  geturl = `https://www.jiosaavn.com/api.php?__call=song.generateAuthToken&url=${media_url}&bitrate=160&api_version=4&_format=json&ctx=wap6dot0&_marker=0
+  geturl = `https://www.jiosaavn.com/api.php?__call=song.generateAuthToken&url=${media_url}&bitrate=${bitrate}&api_version=4&_format=json&ctx=wap6dot0&_marker=0
   `;
   const authurldata = await fetch(geturl).then((data) => data.text());
   const auth_data = JSON.parse(authurldata);
@@ -72,7 +72,10 @@ router.get("/", async (req, res) => {
     if (song?.data[id]?.media_preview_url === undefined) {
       //if the song does not have media preview url
       console.log("mediap url", song);
-      const url = await getsongurl(song.data[id].more_info.encrypted_media_url);
+      const url = await getsongurl(
+        song.data[id].more_info.encrypted_media_url,
+        bitrate
+      );
       songs_cache.put(id, url);
       res.status(200).json({ url: url, source: "by encryption" });
       return;
