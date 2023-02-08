@@ -18,15 +18,15 @@ router.get("/", async (req, res) => {
     return;
   }
 
-  // if (caching.get(id)) {
-  //   res.status(200).json({ data: caching.get(id), source: "cache" });
-  //   return;
-  // }
+  if (caching.get(id)) {
+    res.status(200).json({ data: caching.get(id), source: "cache" });
+    return;
+  }
 
   let link = GetDetails(id, type, page, n);
   console.log(link);
   const response = await get(link);
-  caching.put(id, response.data, cacheTime);
+  // caching.put(id, response.data, cacheTime);
   res.status(200).json({ data: response.data, source: "API" });
 });
 
