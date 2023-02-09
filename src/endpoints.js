@@ -47,6 +47,4 @@ module.exports = {
   getAlbumDetails,
   getPlaylistDetails,
   AuthGetSong,
-  getInstaSearch,
-  getProfile,
 };
