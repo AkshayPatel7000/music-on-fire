@@ -14,6 +14,11 @@ router.get("/", async (req, res) => {
     res.json({ error: "Invalid Arguments" });
     return;
   }
+  if (caching.get(pid)) {
+    res.status(200).json({ data: caching.get(pid), source: "cache" });
+    return;
+  }
+
   let link = getPlaylistDetails(pid);
   console.log(link);
   const response = await get(link);
@@ -38,7 +43,7 @@ router.get("/", async (req, res) => {
     .catch((err) => {
       res.status(200).json({ data: response.data, source: "API" });
     });
-  //   caching.put(aid, response.data, cacheTime);
+  caching.put(pid, response.data, cacheTime);
 });
 
 module.exports = router;

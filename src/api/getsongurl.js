@@ -60,12 +60,12 @@ router.get("/", async (req, res) => {
     return;
   }
 
-  // if (songs_cache.get(id)) {
-  //   //if song url is present in the cache then return it
-  //   let url = songs_cache.get(id).split("_")[0] + "_" + bitrate + ".mp4";
-  //   res.status(200).json({ url: url, source: "Cache" });
-  //   return;
-  // }
+  if (songs_cache.get(id)) {
+    //if song url is present in the cache then return it
+    let url = songs_cache.get(id).split("_")[0] + "_" + bitrate + ".mp4";
+    res.status(200).json({ url: url, source: "Cache" });
+    return;
+  }
   const song = await get(GetSongDetails(id));
 
   if (song.data.status !== "failure") {

@@ -35,11 +35,6 @@ const GetMoreSongs = (query, page) =>
 const AuthGetSong = (url) =>
   `https://www.jiosaavn.com/api.php?__call=song.generateAuthToken&url=${url}&bitrate=128&api_version=4&_format=json&ctx=web6dot0&_marker=0`;
 
-// INSTA
-const getInstaSearch = (query) =>
-  `https://www.instagram.com/api/v1/web/search/topsearch/?query=${query}`;
-const getProfile = (uname) => `
-https://www.instagram.com/api/v1/users/web_profile_info/?username=${uname}`;
 module.exports = {
   GetLaunchData,
   Search,

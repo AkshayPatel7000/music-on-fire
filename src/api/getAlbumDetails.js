@@ -14,11 +14,16 @@ router.get("/", async (req, res) => {
     res.json({ error: "Invalid Arguments" });
     return;
   }
+  if (caching.get(aid)) {
+    res.status(200).json({ data: caching.get(aid), source: "cache" });
+    return;
+  }
 
   let link = getAlbumDetails(aid);
   console.log(link);
   const response = await get(link);
   let finalData = response.data;
+
   var newAlbumData = response?.data?.list?.map(async (album) => {
     var url = album.more_info.encrypted_media_url.split("+").join("%2B");
     url.split("/").join("%2");
@@ -38,7 +43,7 @@ router.get("/", async (req, res) => {
       res.status(200).json({ data: response.data, source: "API" });
     });
 
-  //   caching.put(aid, response.data, cacheTime);
+  caching.put(aid, response.data, cacheTime);
 });
 
 module.exports = router;

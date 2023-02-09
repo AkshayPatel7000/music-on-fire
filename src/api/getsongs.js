@@ -50,7 +50,7 @@ router.get("/", async (req, res) => {
     }
 
     const response = await get(GetDetails(artist_id, type, 1, 25));
-    // caching.put(artist_id, response.data.topSongs, cacheTime);
+    caching.put(artist_id, response.data.topSongs, cacheTime);
     res.status(200).json({ data: response.data.topSongs, source: "API" });
   } else if (query && page) {
     const response = await get(GetMoreSongs(query, page));
