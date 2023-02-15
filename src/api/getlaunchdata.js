@@ -10,7 +10,7 @@ const cacheTime = 60 * 60 * 1000; //time in mili seconds
 router.get("/", async (req, res) => {
   if (!LaunchDataCache.get("data")) {
     var header = {
-      "sec-ch-ua":
+      cookie:
         "DL=english;L=hindi%2Cenglish%2Cpunjabi%2Crajasthani%2Cbhojpuri%2Charyanvi",
       "accept-language": "en-IN,en-GB;q=0.9,en;q=0.8,en-US;q=0.7",
     };

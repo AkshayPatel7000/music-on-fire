@@ -9,6 +9,7 @@ const get = async (url, options) => {
       "user-agent": `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.${x} Safari/537.36 Edg/109.0.1518.${x}`,
       ...options,
     };
+    // console.log("🚀 ~ file: get.js:12 ~ get ~ headers", headers);
 
     const d = await fetch(url, { headers });
 
