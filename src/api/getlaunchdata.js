@@ -8,6 +8,7 @@ const LaunchDataCache = new cache.Cache();
 const cacheTime = 60 * 60 * 1000; //time in mili seconds
 
 router.get("/", async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
   if (!LaunchDataCache.get("data")) {
     var header = {
       cookie:
