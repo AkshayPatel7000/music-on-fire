@@ -11,16 +11,12 @@ const api = require("./api");
 const app = express();
 
 app.use(helmet());
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+app.use(cors());
 app.use(express.json());
 
 app.use(compression());
 
-app.get("/", cors(), (req, res) => {
+app.get("/", (req, res) => {
   res.json({
     message: "Welcome to Musico API",
     "API Docs":
