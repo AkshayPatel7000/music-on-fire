@@ -5,10 +5,11 @@ const { Configuration, OpenAIApi } = require("openai");
 router.get("/", async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   if (req.query) {
+    console.log("🚀 ~ file: openai.js:8 ~ router.get ~ req.query:", req.query);
     try {
       const query = req.query.query;
       const configuration = new Configuration({
-        apiKey: "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",
+        apiKey: "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",
       });
       const openai = new OpenAIApi(configuration);
       const completion = await openai.createCompletion({
@@ -17,15 +18,20 @@ router.get("/", async (req, res) => {
       });
 
       res.json({
+        status: 200,
         message: "Success",
         data: completion.data.choices[0].text,
       });
       // res.send({ data: completion.data.choices[0].text });
     } catch (error) {
-      console.log("🚀 ~ file: index.js:82 ~ apiFunction ~ error:", error);
+      console.log(
+        "🚀 ~ file: index.js:82 ~ apiFunction ~ error:",
+        JSON.stringify(error)
+      );
       res.json({
-        message: "Failed",
-        data: "",
+        status: error.status,
+        message: error.message,
+        data: error.data,
       });
     }
 
