@@ -3,13 +3,12 @@ const router = express.Router();
 const { Configuration, OpenAIApi } = require("openai");
 
 router.get("/", async (req, res) => {
-  res.set("Access-Control-Allow-Origin", "*");
   if (req.query) {
     console.log("🚀 ~ file: openai.js:8 ~ router.get ~ req.query:", req.query);
     try {
       const query = req.query.query;
       const configuration = new Configuration({
-        apiKey: "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",
+        apiKey: "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",
       });
       const openai = new OpenAIApi(configuration);
       const completion = await openai.createCompletion({
