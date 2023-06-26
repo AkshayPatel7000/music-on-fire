@@ -1,5 +1,5 @@
 const express = require("express");
-const { getPlaylistDetails, GetDetails } = require("../endpoints");
+const { getPlaylistDetails, GetDetails, AuthGetSong } = require("../endpoints");
 const { get } = require("../get");
 const router = express.Router();
 const cache = require("memory-cache");
@@ -25,11 +25,16 @@ router.get("/", async (req, res) => {
   var data = response.data;
 
   var final_data = data?.list?.map(async (res) => {
+    var url = res.more_info.encrypted_media_url.split("+").join("%2B");
+    url.split("/").join("%2");
+    var authLink = AuthGetSong(url);
+    var albumData = await get(authLink).then((res) => res);
+
     var id = res.id;
     var songurl = await get(
       `https://music-on-fire.vercel.app/api/v1/getsongurl?id=${id}&bitrate=128`
     );
-    return { ...res, songUrl: songurl?.data?.url };
+    return { ...res, songUrl: albumData.data.auth_url };
   });
 
   Promise.all(final_data)
